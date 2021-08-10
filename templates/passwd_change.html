@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+</head>
+<body>
+    <script language="JavaScript">
+        function compare() {
+            var password = compare_form.password.value
+            var password_again = compare_form.password_again.value
+            if (password_again != password){
+                alert('密码不一致，请重新输入。')
+                return false;
+            }
+            else{
+                alert('提交成功。')
+            }
+        }
+    </script>
+    <form action="" method="post" id="use_auth" name="compare_form" onsubmit="return compare();">
+            {% csrf_token %}
+       请输入新密码：
+        <input type="password" name="password"><a style="color:#ff0000;font-size:12px" > {{ password_change }} </a>
+        <br />
+        请再输入一次：
+        <input type="password" name="password_again">
+        <br />
+        <input type="submit" value="提交">
+    </form>
+
+</body>
+</html>

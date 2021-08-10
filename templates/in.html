@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎！</title>
+</head>
+<body background="/static/image/index1.jpg">
+    <form action="" method="post">
+        {% csrf_token %}
+        用户：
+        <input type="text" name="user" ><a style="color:red;font-size:12px" > {{ filed }} </a>
+        <br />
+        密码：
+        <input type="password" name="passwd">
+        <br />
+        <input type="submit" value="登录">
+    </form>
+    <p>{{ rlt }}</p>
+</body>
+</html>
