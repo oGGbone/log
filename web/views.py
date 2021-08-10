@@ -64,9 +64,9 @@ def Log(request,account):
         job_secondly = models.Job_Log_Secondly.filter(Secoundly_useraccount = account)
         job_next = models.Job_Log_Next.filter(Next_useraccount = account)
         return render(request,'log.html',{'useraccount':job_main})
-######
-#123
-######
+########
+#123342353452345
+########
 
 
 
