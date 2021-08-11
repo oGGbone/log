@@ -36,7 +36,10 @@ def index(request):
         return redirect('/in/')
     else:
         Account = models.Job_Account.objects.all()
-    return render(request,'index.html',{'User_name':Account,'User_number':Account,'User_account':Account,'User_post':Account})
+        Job_main = models.Job_Log_Main.objects.all()
+        Job_secondly = models.Job_Log_Secondly.objects.all()
+        Job_next = models.Job_Log_Next.objects.all()
+    return render(request,'index.html',{'User_name':Account,'Job_main':Job_main,'Job_next':Job_next,'Job_secondly':Job_secondly,})
 
 def logout(request):
     rep = redirect('/in/')
@@ -63,10 +66,8 @@ def Log(request,account):
         job_main = models.Job_Log_Main.objects.filter(Main_useraccount = account)
         job_secondly = models.Job_Log_Secondly.filter(Secoundly_useraccount = account)
         job_next = models.Job_Log_Next.filter(Next_useraccount = account)
-        return render(request,'log.html',{'useraccount':job_main})
-########
-#123342353452345
-########
+     #   return render(request,'log.html',{'User_name':User_name})
+
 
 
 
