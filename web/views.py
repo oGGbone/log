@@ -39,7 +39,7 @@ def index(request):
         Job_main = models.Job_Log_Main.objects.all()
         Job_secondly = models.Job_Log_Secondly.objects.all()
         Job_next = models.Job_Log_Next.objects.all()
-    return render(request,'index.html',{'User_name':Account,'Job_main':Job_main,'Job_next':Job_next,'Job_secondly':Job_secondly,})
+    return render(request,'index.html',{'User_name':Account,'Job_main':Job_main,'Job_next':Job_next,'Job_secondly':Job_secondly,'Getuserid':status})
 
 def logout(request):
     rep = redirect('/in/')
@@ -66,6 +66,22 @@ def userinfo(request):
         Getuserid = request.GET.get('userid')
         User_account = models.Job_Account.objects.values().filter(User_account=Getuserid)
         return render(request,'userinfo.html',{'Getuserid':Getuserid,'User_account':User_account})
+
+def edit_user(request):
+    if request.method == 'GET':
+        return render(request,'edit_user.html')
+    status = request.COOKIES.get('user')
+    if not status:
+        return redirect('/in/')
+    Getuser_name = request.POST.get('user_name')
+    Getuser_number = request.POST.get('user_number')
+    Getuser_post = request.POST.get('user_post')
+    change = models.Job_Account.objects.get(User_account=status)
+    change.User_name = Getuser_name
+    change.User_number = Getuser_number
+    change.User_post = Getuser_post
+    change.save()
+    return render(request,'edit_user.html')
 
 
 
