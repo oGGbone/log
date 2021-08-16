@@ -58,15 +58,15 @@ def passwd_change(request):
     change.save()
     return render(request,'passwd_change.html',{'password_change':'密码修改成功'})
 
-def Log(request,account):
+def userinfo(request):
     status = request.COOKIES.get('user')
     if not status:
         return redirect('/in/')
     else:
-        job_main = models.Job_Log_Main.objects.filter(Main_useraccount = account)
-        job_secondly = models.Job_Log_Secondly.filter(Secoundly_useraccount = account)
-        job_next = models.Job_Log_Next.filter(Next_useraccount = account)
-     #   return render(request,'log.html',{'User_name':User_name})
+        Getuserid = request.GET.get('userid')
+        User_account = models.Job_Account.objects.values().filter(User_account=Getuserid)
+        return render(request,'userinfo.html',{'Getuserid':Getuserid,'User_account':User_account})
+
 
 
 

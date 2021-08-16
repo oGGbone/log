@@ -16,7 +16,7 @@
     </tr>
     {% for lenth in User_name %}
         <tr>
-        <td><a href="/Userinfo({{ lenth.User_account }})">{{ lenth.User_name }}</a></td>
+        <td><a href="/userinfo?userid={{ lenth.User_account }}">{{ lenth.User_name }}</a></td>
         </tr>
     {% endfor %}
     </table>

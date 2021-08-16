@@ -23,5 +23,5 @@ urlpatterns = [
     path('in/',views.login),
     path('out/',views.logout),
     path('password_change/',views.passwd_change),
-    path('Log(<str:account>)/',views.Log),
+    path('userinfo/',views.userinfo),
 ]
