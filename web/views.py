@@ -83,6 +83,17 @@ def edit_user(request):
     change.save()
     return render(request,'edit_user.html')
 
+def main_log(request):
+    status = request.COOKIES.get('user')
+    if not status:
+        return redirect('/in/')
+    else:
+        loginfo = models.Job_Log_Main.objects.all()
+        loginfo_account = model.Job_Log_main.objects.values('Main_useraccount').get()
+        getuser_name = models.Job_Account.objects.values('User_account','User_name').get()
+
+        return render(request,'main_log.html',{'loginfo':loginfo,'userinfo':userinfo})
+
 
 
 
