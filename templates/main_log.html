@@ -21,7 +21,7 @@
             <input type="submit" value="查询">
         </fieldset>
     </form>
-    <table>
+    <table border="1">
         <tr>
             <td>序号</td>
             <td>任务负责人</td>
@@ -32,17 +32,15 @@
             <td>任务完成度</td>
         </tr>
         {% for loginfo in loginfo %}
-        {% for userinfo in userinfo %}
             <tr>
                 <td>{{ loginfo.id }}</td>
-                <td>{{ userinfo.User_name }}</td>
+                <td>{{ loginfo.Main_username }}</td>
                 <td>{{ loginfo.Main_name }}</td>
                 <td>{{ loginfo.Main_begin_date }}</td>
                 <td>{{ loginfo.Main_finish_date }}</td>
                 <td>{{ loginfo.Main_introduce }}</td>
                 <td>{{ loginfo.Main_level }}</td>
             </tr>
-        {% endfor %}
         {% endfor %}
     </table>
 </body>

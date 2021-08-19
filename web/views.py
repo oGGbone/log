@@ -89,10 +89,17 @@ def main_log(request):
         return redirect('/in/')
     else:
         loginfo = models.Job_Log_Main.objects.all()
-        loginfo_account = model.Job_Log_main.objects.values('Main_useraccount').get()
-        getuser_name = models.Job_Account.objects.values('User_account','User_name').get()
-
-        return render(request,'main_log.html',{'loginfo':loginfo,'userinfo':userinfo})
+        lenth = len(loginfo)
+        i = 0
+        getinfo = []
+        for i in range(lenth):
+            getinfo.append(loginfo[i])
+            userinfo = models.Job_Account.objects.get(User_account=getinfo[i].Main_useraccount)
+            getinfo[i].Main_username = userinfo.User_name
+            i += i
+        loginfo = getinfo
+        print(getinfo[0].Main_username)
+        return render(request,'main_log.html',{'loginfo':loginfo})
 
 
 

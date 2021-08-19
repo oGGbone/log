@@ -16,7 +16,7 @@ class Job_Log(models.Model):
         level.append((a,b))
         a += 1
     level = tuple (level)
-    Job_useraccount = models.CharField(max_length=30,unique=True)
+    Job_useraccount = models.CharField(max_length=30)
     Job_flag = models.IntegerField(choices=flag)
     Job_name = models.CharField(max_length=30,unique=True)
     Job_finish_date = models.IntegerField()
@@ -37,7 +37,7 @@ class Job_Log_Main(models.Model):
         level.append((a, b))
         a += 1
     level = tuple(level)
-    Main_useraccount = models.CharField(max_length=30,unique=True)
+    Main_useraccount = models.CharField(max_length=30)
     Main_name = models.CharField(max_length=30,unique=True)
     Main_begin_date = models.IntegerField(default=1)
     Main_finish_date = models.IntegerField()
@@ -52,7 +52,7 @@ class Job_Log_Secondly(models.Model):
         level.append((a, b))
         a += 1
     level = tuple(level)
-    Secondly_useraccount = models.CharField(max_length=30,unique=True)
+    Secondly_useraccount = models.CharField(max_length=30)
     Secondly_name = models.CharField(max_length=30,unique=True)
     Secondly_begin_date = models.IntegerField(default=1)
     Secondly_finish_date = models.IntegerField()
@@ -60,7 +60,7 @@ class Job_Log_Secondly(models.Model):
     Secondly_introduce = models.TextField()
 
 class Job_Log_Next(models.Model):
-    Next_useraccount = models.CharField(max_length=30,unique=True)
+    Next_useraccount = models.CharField(max_length=30)
     Next_name = models.CharField(max_length=30,unique=True)
     Next_begin_date = models.IntegerField()
     Next_introduce = models.TextField()
