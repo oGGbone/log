@@ -87,6 +87,10 @@ def main_log(request):
     status = request.COOKIES.get('user')
     if not status:
         return redirect('/in/')
+    elif (request.method == 'POST'):
+        namesearch = request.POST
+#        print(namesearch['namesearch'])
+
     else:
         loginfo = models.Job_Log_Main.objects.all()
         lenth = len(loginfo)
@@ -98,7 +102,6 @@ def main_log(request):
             getinfo[i].Main_username = userinfo.User_name
             i += i
         loginfo = getinfo
-        print(getinfo[0].Main_username)
         return render(request,'main_log.html',{'loginfo':loginfo})
 
 
