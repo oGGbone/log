@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.shortcuts import render,redirect
 import random,hashlib
 from web import models
+from django.db import connection
 from django.views.decorators import csrf
 from django.http import HttpRequest
 
@@ -84,12 +85,43 @@ def edit_user(request):
     return render(request,'edit_user.html')
 
 def main_log(request):
+#    def search_username(username=name):
+#        main_name = models.Job_Log_Main.objects.filter((Main_name_icontains=namesearch.Main_name) & (Main_level=namesearch.Main_Level))
+
+
+
     status = request.COOKIES.get('user')
     if not status:
         return redirect('/in/')
     elif (request.method == 'POST'):
         namesearch = request.POST
-#        print(namesearch['namesearch'])
+        name = namesearch['namesearch']
+        if name.count() != 0:
+            sql_account = models.Job_Account.objects.get(User_account=name)
+            sql_log = models.Job_Log_Main.objects.filter(Main_useraccount=sql_account.User_account)
+            if sql_log:
+                a = []
+                b = {}
+                for i in sql_log:
+                    b = {'Main_useraccount':i.Main_useraccount,'Main_name':i.Main_name,'Main_finish_date':i.Main_finish_date,'Main_level':i.Main_level,'Main_introduce':i.Main_level,'Main_begin_date':i.Main_begin_date}
+                    a.append(b)
+
+            else:
+                return render(request, 'main_log.html', {'nothing': '暂无数据！'})
+        else:
+            main_name = models.Job_Log_Main.objects.filter((Main_name_icontains=namesearch.Main_name) & (Main_level=namesearch.Main_Level))
+            return render(request, 'main_log.html', {'loginfo': main_name})
+
+        print (sql_log)
+        sql = connection.cursor()
+        sql.execute("select * from web_job_account where User_account = 'admin'")
+        test = sql.fetchall()
+
+        print (test)
+
+ #       for i in range(lenth):
+
+
 
     else:
         loginfo = models.Job_Log_Main.objects.all()
