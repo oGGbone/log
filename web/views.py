@@ -96,7 +96,7 @@ def main_log(request):
     elif (request.method == 'POST'):
         namesearch = request.POST
         name = namesearch['namesearch']
-        if name.count() != 0:
+        if name :
             sql_account = models.Job_Account.objects.get(User_account=name)
             sql_log = models.Job_Log_Main.objects.filter(Main_useraccount=sql_account.User_account)
             if sql_log:
@@ -109,7 +109,7 @@ def main_log(request):
             else:
                 return render(request, 'main_log.html', {'nothing': '暂无数据！'})
         else:
-            main_name = models.Job_Log_Main.objects.filter((Main_name_icontains=namesearch.Main_name) & (Main_level=namesearch.Main_Level))
+            main_name = models.Job_Log_Main.objects.filter(Main_name__icontains=namesearch['mainsearch']).filter(Main_level__gt=namesearch['flag1']).filter( Main_level__lte=namesearch['flag2'])
             return render(request, 'main_log.html', {'loginfo': main_name})
 
         print (sql_log)
