@@ -13,10 +13,10 @@
         {% csrf_token %}
         <fieldset>
             <legend>查找</legend>
-            负责人<input type="search" name="namesearch" id="namesearch" placeholder="关键字">
-            任务名称<input type="search" name="mainsearch" id="mainsearch" placeholder="关键字"><br>
-            开始时间<input type="date" name="begindate1" id="begindate1">至<input type="date" name="begindate2" id="begindate2"><br>
-            预计结束时间<input type="date" name="finishdate1" id="finishdate1">至<input type="date" name="finishdate2" id="finishdate2"><br>
+            负责人<input type="search" name="namesearch" id="namesearch" placeholder="关键字">&emsp;
+            任务名称<input type="search" name="mainsearch" id="mainsearch" placeholder="关键字">&emsp;
+            开始时间<input type="date" name="begindate1" id="begindate1">至<input type="date" name="begindate2" id="begindate2">&emsp;
+            预计结束时间<input type="date" name="finishdate1" id="finishdate1">至<input type="date" name="finishdate2" id="finishdate2">&emsp;
             任务完成度<input type="number" name="flag1" id="flag1" min="0" max="99">至<input type="number" name="flag2" id="flag2" min="1" max="100">
             <input type="submit" value="查询">
         </fieldset>

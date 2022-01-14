@@ -33,6 +33,7 @@ def login(request):
 def index(request):
 #    print(request.COOKIES.get('is_login'))
     status = request.COOKIES.get('user')
+
     if not status:
         return redirect('/in/')
     else:
@@ -96,28 +97,24 @@ def main_log(request):
     elif (request.method == 'POST'):
         namesearch = request.POST
         name = namesearch['namesearch']
-        if name :
-            sql_account = models.Job_Account.objects.get(User_account=name)
-            sql_log = models.Job_Log_Main.objects.filter(Main_useraccount=sql_account.User_account)
-            if sql_log:
-                a = []
-                b = {}
-                for i in sql_log:
-                    b = {'Main_useraccount':i.Main_useraccount,'Main_name':i.Main_name,'Main_finish_date':i.Main_finish_date,'Main_level':i.Main_level,'Main_introduce':i.Main_level,'Main_begin_date':i.Main_begin_date}
-                    a.append(b)
+ #        if name :
+        sql_account = models.Job_Account.objects.get(User_account=name)
+            # sql_log = models.Job_Log_Main.objects.filter(Main_useraccount=sql_account.User_account)
+ # #           if sql_log:
+ #            a = []
+ #            b = {}
+ #            for i in sql_log:
+ #                b = {'Main_useraccount':i.Main_useraccount,'Main_name':i.Main_name,'Main_finish_date':i.Main_finish_date,'Main_level':i.Main_level,'Main_introduce':i.Main_level,'Main_begin_date':i.Main_begin_date}
+ #                a.append(b)
+ #
+ #            else:
+ #                return render(request, 'main_log.html', {'nothing': '暂无数据！'})
+ #        else:
+        print (type(namesearch['mainsearch']))
+        main_name = models.Job_Log_Main.objects.filter(Main_name__icontains=namesearch['mainsearch']).filter(Main_level__gt=namesearch['flag1']).filter( Main_level__lte=namesearch['flag2'].filter(Main_useraccount=sql_account.User_account))
 
-            else:
-                return render(request, 'main_log.html', {'nothing': '暂无数据！'})
-        else:
-            main_name = models.Job_Log_Main.objects.filter(Main_name__icontains=namesearch['mainsearch']).filter(Main_level__gt=namesearch['flag1']).filter( Main_level__lte=namesearch['flag2'])
-            return render(request, 'main_log.html', {'loginfo': main_name})
+        return render(request, 'main_log.html', {'loginfo': main_name})
 
-        print (sql_log)
-        sql = connection.cursor()
-        sql.execute("select * from web_job_account where User_account = 'admin'")
-        test = sql.fetchall()
-
-        print (test)
 
  #       for i in range(lenth):
 
