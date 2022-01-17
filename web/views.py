@@ -6,6 +6,7 @@ from web import models
 from django.db import connection
 from django.views.decorators import csrf
 from django.http import HttpRequest
+import base64
 
 def login(request):
     if request.COOKIES.get('user'):
@@ -13,7 +14,7 @@ def login(request):
     if request.method == 'GET':
         return render(request,'in.html')
     username = request.POST.get('user')
-    password = request.POST.get('passwd')
+    password = base64.b64encode(request.POST.get('passwd').encode(encoding='utf-8',errors='strict')).decode()
     user_obj = models.Job_Account.objects.filter(User_account=username,User_password=password).first()
 #    ---------密码加密
 #    cookie_random = str(random.random())
@@ -56,7 +57,7 @@ def passwd_change(request):
         return redirect('/in/')
     password = request.POST.get('password')
     change = models.Job_Account.objects.get(User_account=status)
-    change.User_password = password
+    change.User_password = base64.b64encode(password.encode(encoding='utf-8',errors='strict')).decode()
     change.save()
     return render(request,'passwd_change.html',{'password_change':'密码修改成功'})
 
